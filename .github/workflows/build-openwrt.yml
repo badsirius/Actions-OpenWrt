@@ -83,13 +83,13 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        make world -j$(nproc)
+        make -j$(nproc)
 
     - name: Single-thread compile
       if: failure()
       run: |
         cd openwrt
-        make world -j1 V=s
+        make -j1 V=s
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
