@@ -84,6 +84,14 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
+    
+    - name: Multi-thread compile 2
+      if: failure()
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make oldconfig
+        make -j$(nproc)
 
     - name: Single-thread compile
       if: failure()
