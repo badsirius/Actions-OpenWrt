@@ -95,12 +95,27 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
+        
+    - name: SSH connect actions 2
+      if: failure()
+      uses: P3TERX/debugger-action@master
+      
+    - name: Multi-thread compile 3
+      if: failure()
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc)
 
     - name: Single-thread compile
       if: failure()
       run: |
         cd openwrt
         make -j1 V=s
+        
+    - name: SSH connect actions 3
+      if: failure()
+      uses: P3TERX/debugger-action@master
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
