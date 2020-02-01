@@ -85,8 +85,11 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
     
-    - name: Multi-thread compile 2
+    - name: SSH connect actions
       if: failure()
+      uses: P3TERX/debugger-action@master
+      
+    - name: Multi-thread compile 2
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
